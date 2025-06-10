@@ -1,8 +1,13 @@
 
 import './App.css'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import  Navbar from  './components/Navbar.jsx'
-import Footer from './components/Footer.jsx'
+import { BrowserRouter as Router, Route , Routes} from 'react-router-dom'
+import  Navbar from './components/layout/Navbar.jsx'
+import Footer from './components/layout/Footer.jsx'
+import Home from '././pages/Home.jsx'
+import About from '././pages/About.jsx'
+import NotFoundPage from '././pages/NotFoundPage.jsx';
+
+
 
 function App() {
 
@@ -11,7 +16,12 @@ function App() {
         <div className="flex flex-col justify-between h-screen">
           <Navbar />
           <main className='mx-auto px-3 container'>
-            Content
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/page-not-found' element={<NotFoundPage />} />
+                <Route path='/*' element={<NotFoundPage />} />
+            </Routes>
           </main>
             <Footer />
         </div>

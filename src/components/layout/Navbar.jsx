@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {FaGithub} from "react-icons/fa";
 import {Link} from "react-router-dom"; // Corrected the import
 
-const Navbar = ({ title }) => {
+const Navbar = ({ title  }) => {
     return (
         <nav className='navbar mb-12 shadow-lg bg-neutral text-neutral-content'>
             <div className='container mx-auto'>
