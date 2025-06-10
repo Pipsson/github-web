@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {useEffect} from 'react';
+import Spinner from '../layout/Spinner.jsx';
+
 function UserResults() {
     // since we are using the vite for installing react, then the env variable start with VITE
     const apiUrl =import.meta.env.VITE_API_URL;
     const apiToken = import.meta.env.VITE_GITHUB_TOKEN;
     console.log(apiUrl);
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true );
     
     useEffect(()=>{
         fetchUsers()
@@ -46,9 +48,7 @@ function UserResults() {
          );
      }
      else  {
-         return <h3>
-             loading ...
-         </h3>
+         return <Spinner />
      }
 
 }
