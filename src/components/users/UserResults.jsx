@@ -1,40 +1,20 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useEffect} from 'react';
 import Spinner from '../layout/Spinner.jsx';
 import UserItem from '../users/UserItem.jsx'
+import GithubContext from "../../context/github/GithubContext.jsx";
 
 function UserResults() {
-    // since we are using the vite for installing reacting, then the env variable start with VITE
-    const apiUrl =import.meta.env.VITE_API_URL;
-    const apiToken = import.meta.env.VITE_GITHUB_TOKEN;
-    console.log(apiUrl);
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true );
+    const {
+        users,
+        loading,
+        fetchUsers
+    } = useContext(GithubContext)
     
     useEffect(()=>{
         fetchUsers()
     },[])
-     const fetchUsers =async ()=>{
-        const response = await fetch(
-            `${apiUrl}/users`,{
-                headers : {
-                    authorization : `token ${
-                        apiToken
-                    }`
-                }
-            }
-
-        )
-         const  data = await response.json();
-        
-         // console.log(data);
-
-         setUsers(data);
-         setLoading(false);
-         
-         
-        
-     }
+    
      if (!loading){
          return (
              <div className='grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
