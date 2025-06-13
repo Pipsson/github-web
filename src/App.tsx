@@ -7,6 +7,8 @@ import Home from '././pages/Home.jsx'
 import About from '././pages/About.jsx'
 import NotFoundPage from '././pages/NotFoundPage.jsx';
 import  {GithubProvider} from './context/github/GithubContext.jsx'
+import  {AlertProvider} from './context/alert/AlertContext.jsx'
+
 
 
 
@@ -14,20 +16,22 @@ function App() {
 
   return (
    <GithubProvider>
-       <Router>
-           <div className="flex flex-col justify-between h-screen">
-               <Navbar />
-               <main className='mx-auto px-3 container'>
-                   <Routes>
-                       <Route path='/' element={<Home />} />
-                       <Route path='/about' element={<About />} />
-                       <Route path='/page-not-found' element={<NotFoundPage />} />
-                       <Route path='/*' element={<NotFoundPage />} />
-                   </Routes>
-               </main>
-               <Footer />
-           </div>
-       </Router>
+    <AlertProvider>
+        <Router>
+            <div className="flex flex-col justify-between h-screen">
+                <Navbar />
+                <main className='mx-auto px-3 container'>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/about' element={<About />} />
+                        <Route path='/page-not-found' element={<NotFoundPage />} />
+                        <Route path='/*' element={<NotFoundPage />} />
+                    </Routes>
+                </main>
+                <Footer />
+            </div>
+        </Router>
+    </AlertProvider>
    </GithubProvider>
   )
 }

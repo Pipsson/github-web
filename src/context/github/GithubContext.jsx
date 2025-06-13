@@ -22,6 +22,8 @@ export const    GithubProvider = ({children}) =>{
     
     const [state,dispatch] = useReducer(githubReducer, initialState);
 
+    
+    // this was a function to fetch all users
     // const fetchUsers =async ()=>{
     //     const response = await fetch(
     //         `${apiUrl}/users`,{
@@ -45,7 +47,7 @@ export const    GithubProvider = ({children}) =>{
     //     // setLoading(false); 
     // }
 
-    //searchUsers function
+    //searchUsers function using query parameter
     const searchUsers = async (text)=>{ 
         setLoading();
         const params = new URLSearchParams({
@@ -78,11 +80,18 @@ export const    GithubProvider = ({children}) =>{
             type : 'SET_LOADING'
         })
  }
+ 
+ const clearUsersResults = () => {
+        dispatch({
+            type : 'CLEAR_SEARCH_RESULT'
+        })
+ }
     return (
         <GithubContext.Provider value={{
             users : state.users,
             loading : state.loading,
-            searchUsers
+            searchUsers,
+            clearUsersResults
         }}> 
             {
                 children
