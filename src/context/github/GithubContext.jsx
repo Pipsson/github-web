@@ -16,6 +16,7 @@ export const    GithubProvider = ({children}) =>{
 
     const initialState = {
         users : [],
+        user : {},
         loading : false,
     }
     
@@ -48,7 +49,43 @@ export const    GithubProvider = ({children}) =>{
     // }
 
     //searchUsers function using query parameter
-    const searchUsers = async (text)=>{ 
+    const searchUsers = async (login)=>{ 
+        setLoading();
+       
+        const response = await fetch(
+            `${apiUrl}/search/user/${login}}`,{
+                headers : {
+                    authorization : `token ${
+                        apiKey
+                    }`
+                }
+            }
+
+        )
+        const  data = await response.json();
+        if (response.status === 404 ) {
+            window.location = '/notfound'
+        }
+        else {
+             //dispatch function to update state
+        dispatch ({
+            type : 'GET_USER',
+            payload : items,
+        })
+        }
+
+
+        //dispatch function to update state
+        dispatch ({
+            type : 'GET_USER',
+            payload : items,
+        })
+        // setUsers(data);
+        // setLoading(false);
+    }
+
+    // function to get user
+     const getUser = async (text)=>{ 
         setLoading();
         const params = new URLSearchParams({
             q:text
